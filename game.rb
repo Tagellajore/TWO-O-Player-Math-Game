@@ -21,29 +21,25 @@ def amend_lives (turn)
     @player2 -= 1
   end
   if @player2 == 0
-    game_over ("Player 1", @player1)
+    game_over("Player 1" , @player1)
   elsif @player1 == 0
-    game_over ("Player 2", @player2)
+    game_over("Player 2" , @player2)
   end
 end
 
 def amend_turn(turn)
-  if turn == 1
-    @turn = 2
-  else
-    @turn = 1
-  end
-  start
+  @turn = (turn == 1 ? 2 : 1)
 end
 
 def start 
+  loop do
   puts "P!: #{@player1}/3 vs P2: #{@player2}/3"
   question = Question.new(turn)
   if !question.start
-    amend_lives(turn)
+    break if amend_lives(turn)
   end
    amend_turn(turn)
 end
 
-
+end
 end
